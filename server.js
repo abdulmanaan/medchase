@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 import Pharmacy from "./models/Pharmacy.js";
 import Medicine from "./models/Medicine.js";
 
+// Make user text safe to use inside a regex
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 const app = express();
 
 // Read JSON from request bodies into req.body
@@ -170,6 +175,32 @@ app.patch("/api/medicines/:id", async (req, res) => {
     medicine.name = name;
     await medicine.save();
     res.json(medicine);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+// Search a medicine
+app.get("/api/search", async (req, res) => {
+  const medicine = req.query.medicine?.trim();
+
+  // Validate input
+  if (!medicine) {
+    return res.status(400).json({ message: "Medicine name is required" });
+  }
+
+  const pattern = escapeRegex(medicine);
+
+  try {
+    // Find all pharmacies which have this medicine
+    const medicines = await Medicine.find({
+      name: { $regex: pattern, $options: "i" },
+    })
+      .populate("pharmacy")
+      .sort({ name: 1 });
+
+    res.json(medicines);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Something went wrong" });
