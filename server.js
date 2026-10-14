@@ -4,12 +4,16 @@ import Pharmacy from "./models/Pharmacy.js";
 import Medicine from "./models/Medicine.js";
 
 const app = express();
+
+// Read JSON from request bodies into req.body
 app.use(express.json());
 
+// Health check
 app.get("/", (req, res) => {
   res.send("MedChase server running");
 });
 
+// Get all pharmacies
 app.get("/api/pharmacies", async (req, res) => {
   try {
     const pharmacies = await Pharmacy.find();
@@ -20,16 +24,22 @@ app.get("/api/pharmacies", async (req, res) => {
   }
 });
 
+// Get one pharmacy by id
 app.get("/api/pharmacies/:id", async (req, res) => {
   const { id } = req.params;
+
+  // Validate input
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({ message: "Invalid pharmacy id" });
   }
+
   try {
+    // Find the pharmacy
     const pharmacy = await Pharmacy.findById(id);
     if (!pharmacy) {
       return res.status(404).json({ message: "Pharmacy not found" });
     }
+
     res.json(pharmacy);
   } catch (error) {
     console.error(error);
@@ -37,13 +47,18 @@ app.get("/api/pharmacies/:id", async (req, res) => {
   }
 });
 
+// Register a new pharmacy
 app.post("/api/pharmacies", async (req, res) => {
   const name = req.body.name?.trim();
   const location = req.body.location?.trim();
+
+  // Validate input
   if (!name || !location) {
     return res.status(400).json({ message: "Name and location are required" });
   }
+
   try {
+    // Save the new pharmacy
     const newPharmacy = await Pharmacy.create({ name, location });
     res.status(201).json(newPharmacy);
   } catch (error) {
@@ -52,20 +67,38 @@ app.post("/api/pharmacies", async (req, res) => {
   }
 });
 
+// Add a medicine to a pharmacy
 app.post("/api/pharmacies/:id/medicines", async (req, res) => {
   const { id } = req.params;
   const name = req.body.name?.trim();
+
+  // Validate input
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({ message: "Invalid pharmacy id" });
   }
   if (!name) {
     return res.status(400).json({ message: "Name is required" });
   }
+
   try {
+    // Make sure the pharmacy exists
     const pharmacy = await Pharmacy.findById(id);
     if (!pharmacy) {
       return res.status(404).json({ message: "Pharmacy not found" });
     }
+
+    // Block duplicates (case-insensitive)
+    const existingMedicine = await Medicine.findOne({
+      name,
+      pharmacy: id,
+    }).collation({ locale: "en", strength: 2 });
+    if (existingMedicine) {
+      return res.status(409).json({
+        message: "Medicine already exists in this pharmacy",
+      });
+    }
+
+    // Save the new medicine
     const newMedicine = await Medicine.create({ name, pharmacy: id });
     res.status(201).json(newMedicine);
   } catch (error) {
@@ -74,15 +107,17 @@ app.post("/api/pharmacies/:id/medicines", async (req, res) => {
   }
 });
 
+// Connect to the database first, then start the server
 async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Database connected.");
+    console.log("Database connected");
+
     app.listen(3000, () => {
-      console.log("Server is running");
+      console.log("Server is running on port 3000");
     });
   } catch (error) {
-    console.log("Database connection failed: " + error.message);
+    console.error("Database connection failed: " + error.message);
     process.exit(1);
   }
 }

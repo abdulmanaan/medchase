@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Shape of a medicine document; each medicine belongs to one pharmacy
 const medicineSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -13,4 +14,5 @@ const medicineSchema = new mongoose.Schema(
 );
 
 const Medicine = mongoose.model("Medicine", medicineSchema);
+
 export default Medicine;
