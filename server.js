@@ -134,6 +134,48 @@ app.delete("/api/medicines/:id", async (req, res) => {
   }
 });
 
+// Edit a medicine
+app.patch("/api/medicines/:id", async (req, res) => {
+  const { id } = req.params;
+  const name = req.body.name?.trim();
+
+  // Validate input
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({ message: "Invalid medicine id" });
+  }
+  if (!name) {
+    return res.status(400).json({ message: "Name is required" });
+  }
+
+  try {
+    // Find the medicine to edit
+    const medicine = await Medicine.findById(id);
+    if (!medicine) {
+      return res.status(404).json({ message: "Medicine not found" });
+    }
+
+    // Block duplicates: another medicine in the same pharmacy with this name
+    const duplicates = await Medicine.findOne({
+      name,
+      pharmacy: medicine.pharmacy,
+      _id: { $ne: id },
+    }).collation({ locale: "en", strength: 2 });
+    if (duplicates) {
+      return res
+        .status(409)
+        .json({ message: "Medicine already exists in this pharmacy" });
+    }
+
+    // Save the new name
+    medicine.name = name;
+    await medicine.save();
+    res.json(medicine);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
 // Connect to the database first, then start the server
 async function connectDB() {
   try {
