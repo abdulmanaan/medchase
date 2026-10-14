@@ -24,7 +24,7 @@ app.get("/api/pharmacies", async (req, res) => {
   }
 });
 
-// Get one pharmacy by id
+// Get one pharmacy by id and its medicines
 app.get("/api/pharmacies/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -108,6 +108,29 @@ app.post("/api/pharmacies/:id/medicines", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+// Delete a medicine
+app.delete("/api/medicines/:id", async (req, res) => {
+  const { id } = req.params;
+
+  // Validate input
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({ message: "Invalid medicine id" });
+  }
+
+  try {
+    // Make sure the medicine exists
+    const deletedMedicine = await Medicine.findByIdAndDelete(id);
+    if (!deletedMedicine) {
+      return res.status(404).json({ message: "Medicine not found" });
+    }
+
+    res.status(200).json({ message: "Medicine deleted" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Something went wrong" });
   }
 });
 
