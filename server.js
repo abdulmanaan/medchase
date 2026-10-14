@@ -36,11 +36,15 @@ app.get("/api/pharmacies/:id", async (req, res) => {
   try {
     // Find the pharmacy
     const pharmacy = await Pharmacy.findById(id);
+
     if (!pharmacy) {
       return res.status(404).json({ message: "Pharmacy not found" });
     }
 
-    res.json(pharmacy);
+    // Get its medicines, A to Z
+    const medicines = await Medicine.find({ pharmacy: id }).sort({ name: 1 });
+
+    res.json({ pharmacy, medicines });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Something went wrong" });
