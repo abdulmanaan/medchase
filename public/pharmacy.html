@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">MedChase</a>
+        <a href="pharmacies.html">Pharmacies</a>
+      </nav>
+    </header>
+
+    <h1 id="pharmacy-name"></h1>
+    <p id="pharmacy-location"></p>
+
+    <form id="medicine-form">
+      <label for="medicine-name">Medicine name</label>
+      <input
+        id="medicine-name"
+        type="text"
+        placeholder="e.g. Panadol"
+        required
+      />
+      <button type="submit">Add</button>
+    </form>
+
+    <p id="form-message"></p>
+
+    <ul id="medicine-list"></ul>
+
+    <script src="js/pharmacy.js"></script>
+  </body>
+</html>
