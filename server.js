@@ -13,10 +13,8 @@ const app = express();
 // Read JSON from request bodies into req.body
 app.use(express.json());
 
-// Health check
-app.get("/", (req, res) => {
-  res.send("MedChase server running");
-});
+// Return static files
+app.use(express.static("public"));
 
 // Get all pharmacies
 app.get("/api/pharmacies", async (req, res) => {
