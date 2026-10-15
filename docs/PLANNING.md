@@ -24,20 +24,22 @@ A web app where:
 
 ## 3. Users
 
-| User | What they want |
-|------|----------------|
-| Patient | Find which pharmacy has a medicine before leaving home |
-| Pharmacy | List their stock so patients can find them |
+| User     | What they want                                         |
+| -------- | ------------------------------------------------------ |
+| Patient  | Find which pharmacy has a medicine before leaving home |
+| Pharmacy | List their stock so patients can find them             |
 
 ## 4. v1 Features
 
 ### Patient
+
 - Search a medicine by name
 - Search ignores capital/small letters (`panadol` = `Panadol`) and matches partial names (`pana` finds `Panadol`)
 - See the list of pharmacies that have the medicine, with each pharmacy's location
 - See a clear "Not available at any pharmacy" message when nothing is found
 
 ### Pharmacy
+
 - Register a pharmacy (name, location)
 - Select their pharmacy from the list
 - View their medicine stock
@@ -68,16 +70,19 @@ A web app where:
 ## 8. Pages
 
 ### Page 1: Search (Home)
+
 The main page. Search box + Search button. Results show pharmacy name and location. Small link at the top: "For pharmacies".
 
 ![Search page](wireframes/search.excalidraw.svg)
 
 ### Page 2: Pharmacies
+
 List of all registered pharmacies. A form to register a new pharmacy. Clicking a pharmacy opens its stock page.
 
 ![Pharmacies page](wireframes/pharmacies.excalidraw.svg)
 
 ### Page 3: Pharmacy Stock
+
 Pharmacy name and location at the top. Input + Add button. Each medicine row has Edit and Delete buttons.
 
 ![Pharmacy stock page](wireframes/pharmacy-stock.excalidraw.svg)
@@ -85,38 +90,35 @@ Pharmacy name and location at the top. Input + Add button. Each medicine row has
 ## 9. Data (Draft)
 
 **Pharmacy**
+
 - name
 - location
 
 **Medicine** (stock item)
-- name
-- which pharmacy it belongs to
 
-> Exact MongoDB structure will be decided at the database step.
+- name
+- pharmacy (reference to Pharmacy \_id)
 
 ## 10. API Endpoints
 
-> To do: write these myself (same REST idea as FastAPI). One endpoint for each feature in section 4.
-
-| Method | Route | What it does |
-|--------|-------|--------------|
-| GET | /api/search?medicine=panadol | Pharmacies that have this medicine (empty list if none) |
-| GET | /api/pharmacies | All pharmacies |
-| POST | /api/pharmacies | Register a new pharmacy |
-| GET | /api/pharmacies/:id | One pharmacy with its medicines |
-| POST | /api/pharmacies/:id/medicines | Add a medicine to this pharmacy |
-| PATCH | /api/medicines/:id | Edit a medicine name |
-| DELETE | /api/medicines/:id | Delete a medicine |
-
+| Method | Route                         | What it does                                                                 |
+| ------ | ----------------------------- | ---------------------------------------------------------------------------- |
+| GET    | /api/pharmacies               | All pharmacies                                                               |
+| POST   | /api/pharmacies               | Register a pharmacy (name, location)                                         |
+| GET    | /api/pharmacies/:id           | One pharmacy with its medicines (A-Z)                                        |
+| POST   | /api/pharmacies/:id/medicines | Add a medicine (no duplicates per pharmacy)                                  |
+| PATCH  | /api/medicines/:id            | Edit a medicine name                                                         |
+| DELETE | /api/medicines/:id            | Delete a medicine                                                            |
+| GET    | /api/search?medicine=name     | Medicines matching the name, with their pharmacy (partial, case-insensitive) |
 
 ## 11. Tech Stack
 
-| Part | Tech |
-|------|------|
-| Frontend | HTML, CSS, JavaScript |
-| Backend | Node.js, Express |
-| Database | MongoDB (Atlas free tier) |
-| Deployment | Decide later (free tier) |
+| Part       | Tech                      |
+| ---------- | ------------------------- |
+| Frontend   | HTML, CSS, JavaScript     |
+| Backend    | Node.js, Express          |
+| Database   | MongoDB (Atlas free tier) |
+| Deployment | Decide later (free tier)  |
 
 ## 12. Definition of Done (v1)
 
