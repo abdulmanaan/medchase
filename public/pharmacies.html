@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharmacies</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">MedChase</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Pharmacies</h1>
+
+      <form id="pharmacy-form">
+        <label for="pharmacy-name">Pharmacy name</label>
+        <input
+          id="pharmacy-name"
+          type="text"
+          placeholder="e.g. CityCare Pharmacy"
+          required
+        />
+        <label for="pharmacy-location">Pharmacy location</label>
+        <input
+          id="pharmacy-location"
+          type="text"
+          placeholder="e.g. 12 Main Street, Downtown"
+          required
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      <p id="form-message"></p>
+
+      <ul id="pharmacy-list"></ul>
+    </main>
+    <script src="js/pharmacies.js"></script>
+  </body>
+</html>
