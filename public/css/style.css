@@ -1,0 +1,25 @@
+:root {
+    --lime: #9FCE5A;
+    --capsule: #F5CE0C;
+    --forest: #1C3B1F;
+    --moss: #5B6B57;
+    --paper: #F7F9F2;
+    --line: DCE3D2;
+    --danger: B42318;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: "Figtree", 'Courier New', Courier, monospace;
+    background: var(--paper);
+    color: var(--forest);
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-family: "Bricolage Grotesque", 'Courier New', Courier, monospace
+}
