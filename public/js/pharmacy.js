@@ -16,6 +16,76 @@ function showMessage(text) {
   list.appendChild(li);
 }
 
+// Create a span with a class and text
+function createSpan(className, text) {
+  const span = document.createElement("span");
+  span.className = className;
+  span.textContent = text;
+  return span;
+}
+
+// Create a button that runs a function on click
+function createButton(text, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = text;
+  button.addEventListener("click", onClick);
+  return button;
+}
+
+// Delete a medicine after confirming
+async function deleteMedicine(medicine) {
+  if (!confirm("Delete " + medicine.name + "?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/medicines/" + medicine._id, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      const data = await response.json();
+      formMessage.textContent = data.message;
+      return;
+    }
+
+    formMessage.textContent = "";
+    loadPharmacy();
+  } catch (error) {
+    console.error(error);
+    formMessage.textContent = "Something went wrong. Please try again.";
+  }
+}
+
+// Rename a medicine
+async function editMedicine(medicine) {
+  const newName = prompt("New name", medicine.name)?.trim();
+
+  // Cancelled, empty, or unchanged: do nothing
+  if (!newName || newName === medicine.name) {
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/medicines/" + medicine._id, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: newName }),
+    });
+    if (!response.ok) {
+      const data = await response.json();
+      formMessage.textContent = data.message;
+      return;
+    }
+
+    formMessage.textContent = "";
+    loadPharmacy();
+  } catch (error) {
+    console.error(error);
+    formMessage.textContent = "Something went wrong. Please try again.";
+  }
+}
+
 // Load the pharmacy and its medicines
 async function loadPharmacy() {
   list.innerHTML = "";
@@ -41,10 +111,12 @@ async function loadPharmacy() {
       return showMessage("No medicines yet");
     }
 
-    // One list item per medicine
+    // One list item per medicine, with Edit and Delete buttons
     for (const medicine of data.medicines) {
       const li = document.createElement("li");
-      li.textContent = medicine.name;
+      li.appendChild(createSpan("medicine-name", medicine.name));
+      li.appendChild(createButton("Edit", () => editMedicine(medicine)));
+      li.appendChild(createButton("Delete", () => deleteMedicine(medicine)));
       list.appendChild(li);
     }
   } catch (error) {
