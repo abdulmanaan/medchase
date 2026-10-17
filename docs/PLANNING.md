@@ -56,6 +56,7 @@ A web app where:
 - **Full prescription search:** search multiple medicines at once and see which pharmacy has all of them
 - **Live location:** show pharmacies on Google Maps with directions
 - **Multiple cities:** search within the patient's city
+- **Search suggestions dropdown:** show matching medicine names while typing, pick one to see results
 
 ## 6. Known Limitations (v1)
 

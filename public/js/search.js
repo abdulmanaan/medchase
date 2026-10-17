@@ -17,10 +17,8 @@ function createSpan(className, text) {
   return span;
 }
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const medicineName = input.value.trim();
-
+async function searchMedicines(medicineName) {
+  // Clear old results
   list.innerHTML = "";
 
   try {
@@ -49,5 +47,19 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
     console.error(error);
     showMessage("Something went wrong. Please try again.");
+  }
+}
+
+// Run a search when the form is submitted
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const medicineName = input.value.trim();
+  searchMedicines(medicineName);
+});
+
+// Clear results when the input is emptied
+input.addEventListener("input", () => {
+  if (input.value.trim() === "") {
+    list.innerHTML = "";
   }
 });
