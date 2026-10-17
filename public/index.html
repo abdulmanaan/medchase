@@ -5,47 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MedChase</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,704&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,500;1,500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,600;1,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Figtree:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="home">
     <header>
       <nav>
-        <a href="/">MedChase</a>
-        <a href="pharmacies.html">Pharmacies</a>
+        <a class="logo" href="/">MedChase</a>
+        <a class="nav-link" href="pharmacies.html">Pharmacies</a>
       </nav>
     </header>
 
     <main>
-      <h1>Find your medicine</h1>
-      <p>See which pharmacies have it in stock before you leave home.</p>
+      <div class="hero">
+        <h1>Find your medicine</h1>
+        <p>See which pharmacies have it in stock before you leave home.</p>
+      </div>
 
-      <form id="search-form">
-        <label for="search-input">Medicine name</label>
+      <form class="search-form" id="search-form">
+        <label class="visually-hidden" for="search-input">Medicine name</label>
         <input
+          class="search-input"
           id="search-input"
           type="search"
           placeholder="e.g. Panadol"
           required
+          autocomplete="off"
         />
-        <button type="submit">Search</button>
+        <button class="search-button" type="submit">Search</button>
       </form>
 
-      <ul id="results"></ul>
+      <ul class="search-results" id="results"></ul>
     </main>
     <script src="js/search.js"></script>
   </body>
