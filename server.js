@@ -18,6 +18,10 @@ app.use(express.json());
 // Return static files
 app.use(express.static("public"));
 
+app.get("/", (req, res) => {
+  res.redirect("/index.html");
+});
+
 // Get all pharmacies
 app.get("/api/pharmacies", async (req, res) => {
   try {
