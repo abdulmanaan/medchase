@@ -135,7 +135,8 @@ h1 {
     padding: 12px 16px;
 }
 
-.search-button {
+.search-button,
+.add-button {
     background: var(--capsule);
     color: var(--forest);
     border: none;
@@ -196,6 +197,113 @@ h1 {
     font-size: 15px;
 }
 
+/* ========== Pharmacies Page ========== */
+.page header {
+    background: var(--lime);
+}
+
+.page main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px 48px;
+}
+
+.page-intro {
+    color: var(--moss);
+    max-width: 60ch;
+    padding-bottom: 24px;
+
+}
+
+.nav-link[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.columns {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.panel {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
+}
+
+.panel h2 {
+    font-size: 22px;
+    padding-bottom: 12px;
+}
+
+.pharmacy-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pharmacy-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+.pharmacy-list li:last-child {
+    border-bottom: none;
+}
+
+.pharmacy-list a {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    color: var(--forest);
+    text-decoration: none;
+    display: block;
+}
+
+.pharmacy-list a:hover {
+    text-decoration: underline;
+}
+
+.pharmacy-location {
+    color: var(--moss);
+    font-size: 15px;
+    display: block;
+}
+
+.pharmacy-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pharmacy-form label {
+    font-weight: 600;
+}
+
+.pharmacy-form input {
+    font: inherit;
+    font-size: 16px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.pharmacy-form input:focus {
+    outline: 3px solid var(--forest);
+    outline-offset: 2px;
+}
+
+.add-button {
+    align-self: flex-start;
+}
+
+.form-message {
+    color: var(--danger);
+    font-weight: 500;
+    padding-top: 12px;
+}
+
 /* ========== Tablet and desktop ========== */
 @media (min-width: 768px) {
     /* Push capsules lower so the hero has more room */
@@ -219,5 +327,17 @@ h1 {
 
     h1 {
         font-size: 70px;
+    }
+
+    .columns {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 32px;
+        align-items: start;
+    }
+
+    .form-panel {
+        position: sticky;
+        top: 24px;
     }
 }

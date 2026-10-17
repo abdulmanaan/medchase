@@ -4,40 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharmacies</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Figtree:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="page">
     <header>
       <nav>
-        <a href="/">MedChase</a>
+        <a class="logo" href="/">MedChase</a>
+        <a class="nav-link" href="pharmacies.html" aria-current="page"
+          >Pharmacies</a
+        >
       </nav>
     </header>
 
     <main>
       <h1>Pharmacies</h1>
+      <p class="page-intro">
+        Pick your pharmacy to update its stock, or add a new one.
+      </p>
 
-      <form id="pharmacy-form">
-        <label for="pharmacy-name">Pharmacy name</label>
-        <input
-          id="pharmacy-name"
-          type="text"
-          placeholder="e.g. CityCare Pharmacy"
-          required
-        />
-        <label for="pharmacy-location">Pharmacy location</label>
-        <input
-          id="pharmacy-location"
-          type="text"
-          placeholder="e.g. 12 Main Street, Downtown"
-          required
-        />
-        <button type="submit">Add</button>
-      </form>
+      <div class="columns">
+        <section class="panel">
+          <h2>All pharmacies</h2>
+          <ul class="pharmacy-list" id="pharmacy-list"></ul>
+        </section>
 
-      <p id="form-message"></p>
-
-      <ul id="pharmacy-list"></ul>
+        <section class="panel form-panel">
+          <h2>Add a pharmacy</h2>
+          <form class="pharmacy-form" id="pharmacy-form">
+            <label for="pharmacy-name">Pharmacy name</label>
+            <input
+              id="pharmacy-name"
+              type="text"
+              placeholder="e.g. CityCare Pharmacy"
+              required
+            />
+            <label for="pharmacy-location">Pharmacy location</label>
+            <input
+              id="pharmacy-location"
+              type="text"
+              placeholder="e.g. 12 Main Street, Downtown"
+              required
+            />
+            <button class="add-button" type="submit">Add</button>
+          </form>
+          <p class="form-message" id="form-message"></p>
+        </section>
+      </div>
     </main>
+
     <script src="js/pharmacies.js"></script>
   </body>
 </html>
