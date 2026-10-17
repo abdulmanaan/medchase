@@ -107,7 +107,7 @@ h1 {
 }
 
 /* ========== Search bar ========== */
-.search-form {
+.capsule-form {
     width: 100%;
     display: flex;
     background: #ffffff;
@@ -119,12 +119,12 @@ h1 {
 }
 
 /* border around the input when typing */
-.search-form:focus-within {
+.capsule-form:focus-within {
     outline: 3px solid var(--forest);
     outline-offset: 3px;
 }
 
-.search-input {
+.capsule-input {
     flex: 1;
     border: none;
     border-radius: 999px;
@@ -135,7 +135,7 @@ h1 {
     padding: 12px 16px;
 }
 
-.search-button,
+.capsule-button,
 .add-button {
     background: var(--capsule);
     color: var(--forest);
@@ -147,7 +147,7 @@ h1 {
     cursor: pointer;
 }
 
-.search-button:hover {
+.capsule-button:hover {
     background: #E9BE03;
 }
 
@@ -238,22 +238,22 @@ h1 {
     padding-bottom: 12px;
 }
 
-.pharmacy-list {
+.item-list {
     list-style: none;
     padding: 0;
 }
 
-.pharmacy-list li {
+.item-list li {
     padding: 16px 0;
     border-bottom: 1px solid var(--line);
     text-align: left;
 }
 
-.pharmacy-list li:last-child {
+.item-list li:last-child {
     border-bottom: none;
 }
 
-.pharmacy-list a {
+.item-list a {
     font-family: var(--font-heading);
     font-size: 20px;
     color: var(--forest);
@@ -261,7 +261,7 @@ h1 {
     display: block;
 }
 
-.pharmacy-list a:hover {
+.item-list a:hover {
     text-decoration: underline;
 }
 
@@ -302,6 +302,62 @@ h1 {
     color: var(--danger);
     font-weight: 500;
     padding-top: 12px;
+}
+
+/* ========== Stock Page ========== */
+
+.page main.narrow {
+    max-width: 720px;
+}
+
+.back-link {
+    color: var(--forest);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    padding-bottom: 12px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.panel .capsule-form {
+    border: 1px solid var(--line);
+    box-shadow: none;
+    margin: 0 0 8px;
+    max-width: none;
+}
+
+#medicine-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.medicine-name {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    flex: 1;
+}
+
+.text-button {
+    background: none;
+    border: none;
+    font: inherit;
+    font-weight: 600;
+    color: var(--forest);
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.text-button:hover {
+    background: var(--paper);
+}
+
+.text-button.danger {
+    color: var(--danger);
 }
 
 /* ========== Tablet and desktop ========== */

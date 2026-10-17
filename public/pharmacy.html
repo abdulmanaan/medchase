@@ -4,34 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Figtree:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body class="page">
     <header>
       <nav>
-        <a href="/">MedChase</a>
-        <a href="pharmacies.html">Pharmacies</a>
+        <a class="logo" href="/">MedChase</a>
+        <a class="nav-link" href="pharmacies.html">Pharmacies</a>
       </nav>
     </header>
 
-    <h1 id="pharmacy-name"></h1>
-    <p id="pharmacy-location"></p>
+    <main class="narrow">
+      <a href="pharmacies.html" class="back-link">Back to pharmacies</a>
+      <h1 id="pharmacy-name"></h1>
+      <p class="page-intro" id="pharmacy-location"></p>
 
-    <form id="medicine-form">
-      <label for="medicine-name">Medicine name</label>
-      <input
-        id="medicine-name"
-        type="text"
-        placeholder="e.g. Panadol"
-        required
-      />
-      <button type="submit">Add</button>
-    </form>
+      <section class="panel">
+        <h2>Medicines in stock</h2>
+        <form class="capsule-form" id="medicine-form">
+          <label class="visually-hidden" for="medicine-name"
+            >Medicine name</label
+          >
+          <input
+            class="capsule-input"
+            id="medicine-name"
+            type="text"
+            placeholder="Add a medicine"
+            required
+            autocomplete="off"
+          />
+          <button class="capsule-button" type="submit">Add</button>
+        </form>
+        <p class="form-message" id="form-message"></p>
+        <ul class="item-list" id="medicine-list"></ul>
+      </section>
+    </main>
 
-    <p id="form-message"></p>
-
-    <ul id="medicine-list"></ul>
-
-    <script src="js/pharmacy.js"></script>
+    <script src="js/pharmacy.js" defer></script>
   </body>
 </html>

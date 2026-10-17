@@ -25,8 +25,9 @@ function createSpan(className, text) {
 }
 
 // Create a button that runs a function on click
-function createButton(text, onClick) {
+function createButton(text, onClick, className) {
   const button = document.createElement("button");
+  button.className = className;
   button.type = "button";
   button.textContent = text;
   button.addEventListener("click", onClick);
@@ -115,8 +116,16 @@ async function loadPharmacy() {
     for (const medicine of data.medicines) {
       const li = document.createElement("li");
       li.appendChild(createSpan("medicine-name", medicine.name));
-      li.appendChild(createButton("Edit", () => editMedicine(medicine)));
-      li.appendChild(createButton("Delete", () => deleteMedicine(medicine)));
+      li.appendChild(
+        createButton("Edit", () => editMedicine(medicine), "text-button"),
+      );
+      li.appendChild(
+        createButton(
+          "Delete",
+          () => deleteMedicine(medicine),
+          "text-button danger",
+        ),
+      );
       list.appendChild(li);
     }
   } catch (error) {
