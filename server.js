@@ -8,6 +8,8 @@ function escapeRegex(text) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 // Read JSON from request bodies into req.body
@@ -211,8 +213,8 @@ async function connectDB() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("Database connected");
 
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    app.listen(PORT, () => {
+      console.log("Server is running on port " + PORT);
     });
   } catch (error) {
     console.error("Database connection failed: " + error.message);
