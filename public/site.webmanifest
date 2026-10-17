@@ -1,0 +1,25 @@
+{
+  "name": "MedChase",
+  "short_name": "MedChase",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#9FCE5A",
+  "background_color": "#F7F9F2",
+  "display": "browser"
+}

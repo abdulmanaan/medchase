@@ -1,399 +1,416 @@
 /* ========== Design tokens ========== */
 :root {
-    /* Colors */
-    --lime: #9FCE5A;      /* home background */
-    --capsule: #F5CE0C;   /* search button */
-    --forest: #1C3B1F;    /* main text, headings */
-    --moss: #5B6B57;      /* secondary text on white */
-    --paper: #F7F9F2;     /* page background */
-    --line: #DCE3D2;      /* dividers */
-    --danger: #B42318;    /* errors */
+  /* Colors */
+  --lime: #9fce5a; /* home background */
+  --capsule: #f5ce0c; /* search button */
+  --forest: #1c3b1f; /* main text, headings */
+  --moss: #5b6b57; /* secondary text on white */
+  --paper: #f7f9f2; /* page background */
+  --line: #dce3d2; /* dividers */
+  --danger: #b42318; /* errors */
 
-    /* Fonts */
-    --font-heading: "Fraunces", Georgia, serif;
-    --font-body: "Figtree", system-ui, sans-serif;
+  /* Fonts */
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-body: "Figtree", system-ui, sans-serif;
 }
 
 /* ========== Base ========== */
 * {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 body {
-    font-family: var(--font-body);
-    background: var(--paper);
-    color: var(--forest);
-    line-height: 1.4;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--forest);
+  line-height: 1.4;
 }
 
-h1, h2, .logo, .result-medicine {
-    font-family: var(--font-heading);
+h1,
+h2,
+.logo,
+.result-medicine {
+  font-family: var(--font-heading);
 }
 
 /* Hide visually, keep for screen readers */
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* ========== Home page layout ========== */
 /* Photo background */
 .home {
-    background-color: var(--lime);
-    background-image: url("../images/hero.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
+  background-color: var(--lime);
+  background-image: url("../images/hero.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Main fills the space under the nav */
 .home main {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 0 16px 20px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 20px;
 }
 
 /* ========== Navigation ========== */
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
 }
 
 .logo {
-    color: inherit;
-    text-decoration: none;
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.logo-mark {
+  height: 30px;
+  width: auto;
 }
 
 .nav-link {
-    font-size: 18px;
-    color: inherit;
-    text-decoration: none;
-    font-weight: 600;
+  font-size: 18px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 /* ========== Hero ========== */
 .hero {
-    text-align: center;
-    padding: 0 16px;
+  text-align: center;
+  padding: 0 16px;
 }
 
 h1 {
-    font-size: 40px;
-    margin-bottom: 12px;
-    letter-spacing: -0.02em;
+  font-size: 40px;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
 }
 
 /* Green glow to keep text readable */
 .hero p {
-    font-size: 20px;
-    font-weight: 500;
-    text-shadow: 0 0 8px var(--lime), 0 0 16px var(--lime);
-    max-width: 32ch;
-    margin: 0 auto;
+  font-size: 20px;
+  font-weight: 500;
+  text-shadow:
+    0 0 8px var(--lime),
+    0 0 16px var(--lime);
+  max-width: 32ch;
+  margin: 0 auto;
 }
 
 /* ========== Search bar ========== */
 .capsule-form {
-    width: 100%;
-    display: flex;
-    background: #ffffff;
-    border-radius: 999px;
-    padding: 6px;
-    max-width: 560px;
-    margin: 24px auto 0;
-    box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
+  width: 100%;
+  display: flex;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 6px;
+  max-width: 560px;
+  margin: 24px auto 0;
+  box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
 }
 
 /* border around the input when typing */
 .capsule-form:focus-within {
-    outline: 3px solid var(--forest);
-    outline-offset: 3px;
+  outline: 3px solid var(--forest);
+  outline-offset: 3px;
 }
 
 .capsule-input {
-    flex: 1;
-    border: none;
-    border-radius: 999px;
-    background: transparent;
-    outline: none;
-    font: inherit;
-    font-size: 16px;
-    padding: 12px 16px;
+  flex: 1;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  outline: none;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 16px;
 }
 
 .capsule-button,
 .add-button {
-    background: var(--capsule);
-    color: var(--forest);
-    border: none;
-    border-radius: 999px;
-    padding: 12px 24px;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
+  background: var(--capsule);
+  color: var(--forest);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .capsule-button:hover {
-    background: #E9BE03;
+  background: #e9be03;
 }
 
 /* ========== Search results ========== */
 /* Hide list when empty */
 .search-results:empty {
-    display: none;
+  display: none;
 }
 
 /* White panel for results */
 .search-results {
-    width: 100%;
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 8px 24px;
-    max-width: 560px;
-    margin: 16px auto 0;
-    box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
-    list-style: none;
-    min-height: 0;
-    overflow-y: auto;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 8px 24px;
+  max-width: 560px;
+  margin: 16px auto 0;
+  box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
+  list-style: none;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .search-results li {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
 }
 
 .search-results li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .result-medicine {
-    display: block;
-    font-size: 20px;
+  display: block;
+  font-size: 20px;
 }
 
 .result-pharmacy {
-    display: block;
-    font-weight: 600;
+  display: block;
+  font-weight: 600;
 }
 
 .result-location {
-    display: block;
-    color: var(--moss);
-    font-size: 15px;
+  display: block;
+  color: var(--moss);
+  font-size: 15px;
 }
 
 /* ========== Pharmacies Page ========== */
 .page header {
-    background: var(--lime);
+  background: var(--lime);
 }
 
 .page main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 32px 16px 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
 }
 
 .page-intro {
-    color: var(--moss);
-    max-width: 60ch;
-    padding-bottom: 24px;
-
+  color: var(--moss);
+  max-width: 60ch;
+  padding-bottom: 24px;
 }
 
 .nav-link[aria-current="page"] {
-    text-decoration: underline;
-    text-underline-offset: 6px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 
 .columns {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .panel {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(28, 59, 31, 0.15);
 }
 
 .panel h2 {
-    font-size: 22px;
-    padding-bottom: 12px;
+  font-size: 22px;
+  padding-bottom: 12px;
 }
 
 .item-list {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .item-list li {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
 }
 
 .item-list li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .item-list a {
-    font-family: var(--font-heading);
-    font-size: 20px;
-    color: var(--forest);
-    text-decoration: none;
-    display: block;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--forest);
+  text-decoration: none;
+  display: block;
 }
 
 .item-list a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .pharmacy-location {
-    color: var(--moss);
-    font-size: 15px;
-    display: block;
+  color: var(--moss);
+  font-size: 15px;
+  display: block;
 }
 
 .pharmacy-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .pharmacy-form label {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .pharmacy-form input {
-    font: inherit;
-    font-size: 16px;
-    padding: 12px 16px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
 }
 
 .pharmacy-form input:focus {
-    outline: 3px solid var(--forest);
-    outline-offset: 2px;
+  outline: 3px solid var(--forest);
+  outline-offset: 2px;
 }
 
 .add-button {
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .form-message {
-    color: var(--danger);
-    font-weight: 500;
-    padding-top: 12px;
+  color: var(--danger);
+  font-weight: 500;
+  padding-top: 12px;
 }
 
 /* ========== Stock Page ========== */
 
 .page main.narrow {
-    max-width: 720px;
+  max-width: 720px;
 }
 
 .back-link {
-    color: var(--forest);
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    padding-bottom: 12px;
+  color: var(--forest);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 12px;
 }
 
 .back-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .panel .capsule-form {
-    border: 1px solid var(--line);
-    box-shadow: none;
-    margin: 0 0 8px;
-    max-width: none;
+  border: 1px solid var(--line);
+  box-shadow: none;
+  margin: 0 0 8px;
+  max-width: none;
 }
 
 #medicine-list li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .medicine-name {
-    font-family: var(--font-heading);
-    font-size: 18px;
-    flex: 1;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  flex: 1;
 }
 
 .text-button {
-    background: none;
-    border: none;
-    font: inherit;
-    font-weight: 600;
-    color: var(--forest);
-    padding: 10px 14px;
-    border-radius: 999px;
-    cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--forest);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
 }
 
 .text-button:hover {
-    background: var(--paper);
+  background: var(--paper);
 }
 
 .text-button.danger {
-    color: var(--danger);
+  color: var(--danger);
 }
 
 /* ========== Tablet and desktop ========== */
 @media (min-width: 768px) {
-    /* Push capsules lower so the hero has more room */
-    .home {
-        background-position: center top;
-    }
+  /* Push capsules lower so the hero has more room */
+  .home {
+    background-position: center top;
+  }
 
-    nav {
-        padding: 32px;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
+  nav {
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 
-    .logo {
-        font-size: 34px;
-    }
+  .logo {
+    font-size: 34px;
+  }
 
-    .nav-link {
-        font-size: 22px;
-    }
+  .logo-mark {
+    height: 42px;
+    width: auto;
+  }
 
-    h1 {
-        font-size: 70px;
-    }
+  .nav-link {
+    font-size: 22px;
+  }
 
-    .columns {
-        display: grid;
-        grid-template-columns: 1fr 360px;
-        gap: 32px;
-        align-items: start;
-    }
+  h1 {
+    font-size: 70px;
+  }
 
-    .form-panel {
-        position: sticky;
-        top: 24px;
-    }
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .form-panel {
+    position: sticky;
+    top: 24px;
+  }
 }
