@@ -2,8 +2,12 @@ const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
 const list = document.getElementById("results");
 
-// Show a single message inside results list
+let timer; // pending debounce timer
+let latestSearch = 0; // number of the newest search
+
+// Replace the list with a single message
 function showMessage(text) {
+  list.innerHTML = "";
   const li = document.createElement("li");
   li.textContent = text;
   list.appendChild(li);
@@ -18,25 +22,28 @@ function createSpan(className, text) {
 }
 
 async function searchMedicines(medicineName) {
-  // Clear old results
-  list.innerHTML = "";
+  const searchId = ++latestSearch;
 
   try {
     // Ask the API
     const response = await fetch(
       "/api/search?medicine=" + encodeURIComponent(medicineName),
     );
+    if (searchId !== latestSearch) return;
     if (!response.ok) {
       return showMessage("Something went wrong. Please try again.");
     }
-    const medicines = await response.json();
 
-    // Noting found
+    const medicines = await response.json();
+    if (searchId !== latestSearch) return;
+
+    // Nothing found
     if (medicines.length === 0) {
-      return showMessage("Not availabe at any pharmacy.");
+      return showMessage("Not available at any pharmacy");
     }
 
-    // One list item per result
+    // Replace old results with new ones
+    list.innerHTML = "";
     for (const medicine of medicines) {
       const li = document.createElement("li");
       li.appendChild(createSpan("result-medicine", medicine.name));
@@ -46,20 +53,30 @@ async function searchMedicines(medicineName) {
     }
   } catch (error) {
     console.error(error);
-    showMessage("Something went wrong. Please try again.");
+    if (searchId === latestSearch) {
+      showMessage("Something went wrong. Please try again.");
+    }
   }
 }
 
-// Run a search when the form is submitted
+// Search on submit or Enter key
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const medicineName = input.value.trim();
-  searchMedicines(medicineName);
+  clearTimeout(timer);
+  searchMedicines(input.value.trim());
 });
 
-// Clear results when the input is emptied
+// Typing: search after the user pauses
 input.addEventListener("input", () => {
-  if (input.value.trim() === "") {
+  clearTimeout(timer);
+  const medicineName = input.value.trim();
+
+  // Cancel pending searches and clear the list if empty
+  if (!medicineName) {
+    latestSearch++;
     list.innerHTML = "";
+    return;
   }
+
+  timer = setTimeout(() => searchMedicines(medicineName), 300);
 });
