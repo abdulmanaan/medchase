@@ -4,7 +4,7 @@
 
 **Version:** v1
 **Author:** Abdul Manan
-**Status:** Planning
+**Status:** v1 done
 **Date:** October 2026
 
 ---
@@ -62,6 +62,7 @@ A web app where:
 ## 6. Known Limitations (v1)
 
 - No login, so anyone can edit any pharmacy's stock. Accepted for v1 since the goal is learning the backend first. Fixed in the version with pharmacy accounts.
+- It is not based on real data. The data is used only for testing. The pharmacies and medicines it have are not real.
 
 ## 7. Assumptions
 
@@ -120,13 +121,13 @@ Pharmacy name and location at the top. Input + Add button. Each medicine row has
 | Frontend   | HTML, CSS, JavaScript     |
 | Backend    | Node.js, Express          |
 | Database   | MongoDB (Atlas free tier) |
-| Deployment | Decide later (free tier)  |
+| Deployment | Vercel                    |
 
 ## 12. Definition of Done (v1)
 
-- [ ] A pharmacy can register and add, edit and delete its medicines
-- [ ] A patient can search a medicine and see which pharmacies have it, with location
-- [ ] Data is saved in MongoDB and stays after a page refresh
-- [ ] Works on mobile and desktop
-- [ ] Code pushed to GitHub with a README
-- [ ] Deployed live
+- [x] A pharmacy can register and add, edit and delete its medicines
+- [x] A patient can search a medicine and see which pharmacies have it, with location
+- [x] Data is saved in MongoDB and stays after a page refresh
+- [x] Works on mobile and desktop
+- [x] Code pushed to GitHub with a README
+- [x] Deployed live
