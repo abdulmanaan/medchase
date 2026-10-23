@@ -18,6 +18,31 @@ app.use(express.json());
 // Return static files
 app.use(express.static("public"));
 
+// Connect once, then reuse the same connection
+let connection;
+function connectDB() {
+  if (!connection) {
+    connection = mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+  }
+  return connection;
+}
+
+// Every API route needs the database, so connect first
+app.use("/api", async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection failed: " + error.message);
+    connection = null; // try again on the next request
+    res
+      .status(503)
+      .json({ message: "Database is not available. Please try again." });
+  }
+});
+
 app.get("/", (req, res) => {
   res.redirect("/index.html");
 });
@@ -211,19 +236,11 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
-// Connect to the database first, then start the server
-async function connectDB() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Database connected");
-
-    app.listen(PORT, () => {
-      console.log("Server is running on port " + PORT);
-    });
-  } catch (error) {
-    console.error("Database connection failed: " + error.message);
-    process.exit(1);
-  }
+// Start a local server
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log("Server is running on port " + PORT);
+  });
 }
 
-connectDB();
+export default app;
